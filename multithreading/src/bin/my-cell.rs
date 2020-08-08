@@ -1,5 +1,10 @@
 use std::cell::Cell;
 
+// cell is not snyc
+// you will be able to insert a new value in the cell 
+// or get the current cell value if it's a Copy type
+
+
 // cargo run --bin my-cell
 fn main() {
     //Note that the my_cell variable is not mutable, but the program still compiles
