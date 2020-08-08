@@ -11,6 +11,8 @@ use std::collections::HashMap;
 // and panic if the current state is not correct. 
 // They have non-panicking alternatives named try_borrow() and try_borrow_mut()
 
+
+// cargo run --bin my-refcell
 fn main() {
     let hm = HashMap::new();
     let my_cell = RefCell::new(hm);
