@@ -2,4 +2,5 @@
 
 members = [ 
     "memory-management-in-rust",
+    "multithreading",
 ]
