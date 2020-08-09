@@ -5,6 +5,10 @@ use std::thread;
 fn main() {
     let my_vec = vec![10, 33, 54];
 
+    // The behavior of `Arc`, being able to be
+    // shared among threads, is only thanks to implementing the
+    // `Sync` trait, and it will only implement it if the inner
+    // value implements `Sync` and `Send`
     let main_thread_pointer = Arc::new(my_vec);
 
     let second_thread_pointer = main_thread_pointer.clone();
