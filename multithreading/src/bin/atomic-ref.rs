@@ -11,19 +11,16 @@ fn main() {
         .name("my thread".to_owned())
         .spawn(move || {
             for _ in 0..250_000 {
-                let cur_value = thread_pointer.load(Ordering::Relaxed);
-                let sum = cur_value + 1;
-                thread_pointer.store(sum, Ordering::Relaxed);
+                thread_pointer.fetch_add(1, Ordering::Relaxed);
             }
         })
         .expect("could not create the thread");
 
     for _ in 0..250_000 {
-        let cur_value = main_pointer.load(Ordering::Relaxed);
-        let sum = cur_value + 1;
-        // When we save the integer, we don't check whether
-        // it has changed, so we are overriding whatever was written there
-        main_pointer.store(sum, Ordering::Relaxed);
+        // atomics have the great fetch_add() function and its friends fetch_sub(),
+        // fetch_and(), fetch_or(), and fetch_xor().
+        // They will perform the complete operation atomically
+        main_pointer.fetch_add(1, Ordering::Relaxed);
     }
 
     if handle.join().is_err() {
